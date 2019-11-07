@@ -5,4 +5,4 @@ catch: npm
 install: 
 -npm ci
 script:
--npm test
+-npm run test
