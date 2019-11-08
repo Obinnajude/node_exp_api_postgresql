@@ -6,6 +6,5 @@ install:
 -npm ci
 env:
 -DB: postgres
--test: jasmine
 script:
 -npm run test

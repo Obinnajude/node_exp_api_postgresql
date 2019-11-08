@@ -37,3 +37,24 @@ describe('POST /auth/create-user', () => {
     });
   });
 });
+
+describe('POST /auth/signin', () => {
+  const url = "http://localhost:3000/api/v2/auth/signin";
+
+  it("should return status 200", () => {
+    Request.post(url, (error, response) => {
+      expect(response.statusCode).toBe(200);
+    });
+  });
+  it("should have response spec json", () => {
+    Request.post(url, (error, response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          token: response.body.token,
+          userId: response.body.userid
+        }
+      });
+    });
+  });
+});
