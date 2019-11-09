@@ -163,3 +163,34 @@ exports.deleteGif = (req, res) => {
     });
   });
 };
+exports.createCommentArticle = (req, res) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+  const createdOn = new Date();
+
+  pool.query('SELECT * FROM articletb WHERE article_id = $1', [id]).then((data) => {
+    const articleId = data.rows[0].article_id;
+    const articleTitle = data.rows[0].article_title;
+    const articleBody = data.rows[0].article_body;
+    pool.query('INSERT INTO commenttb(commentId, comment, createdOn)VALUES($1,$2,$3)', [articleId, comment, createdOn]).then(() => {
+      res.status(201).json({
+        status: "success",
+        data: {
+          message: "Comment successfully created",
+          createdOn,
+          articleTitle,
+          articleBody,
+          comment
+        }
+      });
+    }).catch(() => {
+      res.status(400).json({
+        Error: " comment not created"
+      });
+    });
+  }).catch(() => {
+    res.status(400).json({
+      Error: "Failed to select article id"
+    });
+  });
+};
