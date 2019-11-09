@@ -116,3 +116,29 @@ describe('POST /articles', () => {
     });
   });
 });
+
+describe('PATCh /articles/:id', () => {
+  const url = "/api/v2/articles/:id";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return status 201", () => {
+    request(server).patch(url, (error, response) => {
+      expect(response.statusCode).toBe(201);
+    });
+  });
+  it("should have response spec", () => {
+    request(server).patch(url, (error, response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          massage: response.body.message,
+          articleTitle: response.body.articleTitle,
+          articleBody: response.body.articleBody
+        }
+      });
+    });
+  });
+});
