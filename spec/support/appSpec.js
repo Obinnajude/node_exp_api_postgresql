@@ -20,18 +20,18 @@ describe('POST /auth/create-user', () => {
 
   it("should return status 201", () => {
     Request.post(url, (error, response) => {
-      expect(response.body.status).toBe(success);
+      expect(response.status).toBe(success);
     });
   });
-  it("body", () => {
+  it('body', () => {
     Request.post(url, (error, response) => {
-      expect(response.body).toEqual({
-        status: response.body.status,
+      expect(response).toEqual({
+        status: response.status,
         data: {
-          message: response.body.message,
-          articleId: response.body.articleId,
-          createdOn: response.body.createdOn,
-          articleTitle: response.body.articleTitle
+          message: response.message,
+          articleId: response.articleId,
+          createdOn: response.createdOn,
+          articleTitle: response.articleTitle
         }
       });
     });
@@ -43,16 +43,16 @@ describe('POST /auth/signin', () => {
 
   it("should return status 200", () => {
     Request.post(url, (error, response) => {
-      expect(response.body.status).toBe(success);
+      expect(response.status).toBe(success);
     });
   });
   it("should have response spec json", () => {
     Request.post(url, (error, response) => {
-      expect(response.body).toEqual({
-        status: response.body.status,
+      expect(response).toEqual({
+        status: response.status,
         data: {
-          token: response.body.token,
-          userId: response.body.userid
+          token: response.token,
+          userId: response.userid
         }
       });
     });
@@ -64,19 +64,19 @@ describe('POST /gifs', () => {
 
   it("should return status 201", () => {
     Request.post(url, (error, response) => {
-      expect(response.body.status).toBe(success);
+      expect(response.status).toBe(success);
     });
   });
   it("should have response spec", () => {
     Request.post(url, (error, response) => {
-      expect(response.body).toEqual({
-        status: response.body.status,
+      expect(response).toEqual({
+        status: response.status,
         data: {
-          gifId: response.body.gifId,
-          message: response.body.message,
-          createdOn: response.body.createdOn,
-          title: response.body.title,
-          imageUrl: response.body.imageUrl
+          gifId: response.gifId,
+          message: response.message,
+          createdOn: response.createdOn,
+          title: response.title,
+          imageUrl: response.imageUrl
         }
       });
     });
