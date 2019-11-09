@@ -98,3 +98,36 @@ exports.editArticle = (req, res) => {
     });
   });
 };
+exports.deleteArticle = (req, res) => {
+  const { id } = req.params;
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, 'AM-HAPPY');
+  const { userId } = decodedToken;
+  pool.query('SELECT authorid FROM articletb WHERE article_id = $1', [id]).then((data) => {
+    if (data.rows[0].authorid == userId) {
+      pool.query('DELETE FROM articletb WHERE article_id =$1', [id]).then(() => {
+        res.status(200).json({
+          status: 'success',
+          data: {
+            message: "Article Successfully deleted"
+          }
+        });
+      }).catch(() => {
+        res.status(400).json({
+          status: "error",
+          error: "Article unable to delete"
+        });
+      });
+    } else {
+      res.status(400).json({
+        status: "error",
+        error: "You can't delete this article. Maybe you are not the author"
+      });
+    }
+  }).catch(() => {
+    res.status(400).json({
+      status: "error",
+      error: "article does not exist"
+    });
+  });
+};

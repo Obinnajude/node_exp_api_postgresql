@@ -6,6 +6,6 @@ const router = express.Router();
 router.post('/gifs', auth, employeeCtrl.createGifs);
 router.post('/articles', auth, employeeCtrl.createArticle);
 router.patch('/articles/:articleId', auth, employeeCtrl.editArticle);
-
+router.delete('/articles/:id', auth, employeeCtrl.deleteArticle);
 
 module.exports = router;
