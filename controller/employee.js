@@ -194,3 +194,33 @@ exports.createCommentArticle = (req, res) => {
     });
   });
 };
+exports.gifCreateComment = (req, res) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+  const createdOn = new Date();
+
+  pool.query('SELECT * FROM gifstb WHERE gifid = $1', [id]).then((data) => {
+    // eslint-disable-next-line radix
+    const gifsId = data.rows[0].gifid;
+    const gifTitle = data.rows[0].title;
+    pool.query('INSERT INTO gifcommenttb(commentId, comment, createdOn)VALUES($1,$2,$3)', [gifsId, comment, createdOn]).then(() => {
+      res.status(201).json({
+        status: "success",
+        data: {
+          message: "Comment successfully created",
+          createdOn,
+          gifTitle,
+          comment
+        }
+      });
+    }).catch(() => {
+      res.status(400).json({
+        Error: " comment not created"
+      });
+    });
+  }).catch(() => {
+    res.status(400).json({
+      Error: "Failed to select gif id"
+    });
+  });
+};

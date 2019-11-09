@@ -216,3 +216,29 @@ describe('POST /articles/:id/comment', () => {
     });
   });
 });
+describe('POST /gifss/:id/comment', () => {
+  const url = "/api/v2/gifs/:id/comment";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return status 201", () => {
+    request(server).delete(url, (response) => {
+      expect(response.statusCode).toBe(201);
+    });
+  });
+  it("should have response spec", () => {
+    request(server).patch(url, (response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          message: response.body.message,
+          createdOn: response.body.createdOn,
+          gifTitle: response.body.gifTitle,
+          comment: response.body.comment
+        }
+      });
+    });
+  });
+});
