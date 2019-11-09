@@ -20,7 +20,7 @@ describe('POST /auth/create-user', () => {
 
   it("should return status 201", () => {
     Request.post(url, (error, response) => {
-      expect(response.statusCode).toBe(201);
+      expect(response.body.status).toBe(success);
     });
   });
   it("body", () => {
@@ -43,7 +43,7 @@ describe('POST /auth/signin', () => {
 
   it("should return status 200", () => {
     Request.post(url, (error, response) => {
-      expect(response.statusCode).toBe(200);
+      expect(response.body.status).toBe(success);
     });
   });
   it("should have response spec json", () => {
@@ -64,7 +64,7 @@ describe('POST /gifs', () => {
 
   it("should return status 201", () => {
     Request.post(url, (error, response) => {
-      expect(response.statusCode).toBe(201);
+      expect(response.body.status).toBe(success);
     });
   });
   it("should have response spec", () => {
