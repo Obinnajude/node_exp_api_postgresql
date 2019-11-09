@@ -243,3 +243,31 @@ exports.newsFeed = (req, res) => {
     });
   });
 };
+exports.viewArticle = (req, res) => {
+  const { id } = req.params;
+  pool.query('SELECT * FROM articletb WHERE article_id = $1', [id]).then((data) => {
+    pool.query(`SELECT * FROM commenttb where ${data.rows[0].article_id} = commentid`).then((result) => {
+      res.status(200).json({
+        status: 'success',
+        data: {
+          id: data.rows[0].article_id,
+          createdOn: data.rows[0].createdon,
+          title: data.rows[0].article_title,
+          article: data.rows[0].article_body,
+          comments: [
+            result.rows
+          ]
+        }
+
+      });
+    }).catch(() => {
+      res.status(400).json({
+        message: "unable to return comments"
+      });
+    });
+  }).catch(() => {
+    res.status(400).json({
+      message: "unable to return article"
+    });
+  });
+};

@@ -263,3 +263,32 @@ describe('GET /feed', () => {
     });
   });
 });
+describe('GET /articles/:id', () => {
+  const url = "/api/v2/articles/:id";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return status 200", () => {
+    request(server).delete(url, (response) => {
+      expect(response.statusCode).toBe(200);
+    });
+  });
+  it("should have response spec", () => {
+    request(server).patch(url, (response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          id: response.body.id,
+          createdOn: response.body.createdon,
+          title: response.body.title,
+          article: response.body.article,
+          comments: [
+            response.body.comment
+          ]
+        }
+      });
+    });
+  });
+});

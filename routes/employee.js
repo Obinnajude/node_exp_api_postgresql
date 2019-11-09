@@ -11,5 +11,6 @@ router.delete('/gifs/:id', auth, employeeCtrl.deleteGif);
 router.post('/articles/:id/comment', auth, employeeCtrl.createCommentArticle);
 router.post('/gifs/:id/comment', auth, employeeCtrl.gifCreateComment);
 router.get('/feed', employeeCtrl.newsFeed);
+router.get('/articles/:id', employeeCtrl.viewArticle);
 
 module.exports = router;
