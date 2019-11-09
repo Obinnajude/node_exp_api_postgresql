@@ -271,3 +271,31 @@ exports.viewArticle = (req, res) => {
     });
   });
 };
+exports.viewgif = (req, res) => {
+  const { id } = req.params;
+  pool.query('SELECT * FROM gifstb WHERE gifid = $1', [id]).then((data) => {
+    pool.query(`SELECT * FROM gifcommenttb where ${data.rows[0].gifid} = commentid`).then((result) => {
+      res.status(200).json({
+        status: 'success',
+        data: {
+          id: data.rows[0].gifid,
+          createdOn: data.rows[0].createdon,
+          title: data.rows[0].title,
+          url: data.rows[0].imageurl,
+          comments: [
+            result.rows
+          ]
+        }
+
+      });
+    }).catch(() => {
+      res.status(400).json({
+        Error: "Gifcomments was not selected successfully"
+      });
+    });
+  }).catch(() => {
+    res.status(400).json({
+      Error: "gifs are not selected form the database"
+    });
+  });
+};
