@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jasmine",
+    "build": "./dist ./build",
     "start": "node server.js",
     "eslint": "eslint server.js",
     "nodemonstart": "nodemon server.js",
@@ -17,7 +18,8 @@
   "keywords": [
     "start",
     "test",
-    "eslint"
+    "eslint",
+    "build"
   ],
   "author": "Obinna Jude",
   "license": "ISC",
@@ -28,6 +30,7 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "cloudinary": "^1.16.0",
     "express": "^4.17.1",
     "jasmine": "^3.5.0",
     "jsonwebtoken": "^8.5.1",

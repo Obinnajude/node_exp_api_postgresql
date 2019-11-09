@@ -16,19 +16,19 @@ pool.on('connect', () => {
 });
 
 const createTables = () => {
-  const usersTable = `CREATE TABLE IF NOT EXISTS
-        users(
-          userId SERIAL PRIMARY KEY,
-          first_name VARCHAR(128) NOT NULL,
-          last_name VARCHAR(128) NOT NULL,
-          email VARCHAR(128) NOT NULL UNIQUE,
-          password VARCHAR(128) NOT NULL,
-          gender VARCHAR(128) NOT NULL,
-          job_role VARCHAR(128) NOT NULL,
-          department VARCHAR(128) NOT NULL,
-          address VARCHAR(128) NOT NULL,
-          token  VARCHAR(255)
-        )`;
+  // const usersTable = `CREATE TABLE IF NOT EXISTS
+  //       users(
+  //         userId SERIAL PRIMARY KEY,
+  //         first_name VARCHAR(128) NOT NULL,
+  //         last_name VARCHAR(128) NOT NULL,
+  //         email VARCHAR(128) NOT NULL UNIQUE,
+  //         password VARCHAR(128) NOT NULL,
+  //         gender VARCHAR(128) NOT NULL,
+  //         job_role VARCHAR(128) NOT NULL,
+  //         department VARCHAR(128) NOT NULL,
+  //         address VARCHAR(128) NOT NULL,
+  //         token  VARCHAR(255)
+  //       )`;
   // const articleTable = `CREATE TABLE IF NOT EXISTS
   //     articletb(
   //       article_id SERIAL PRIMARY KEY,
@@ -38,14 +38,14 @@ const createTables = () => {
   //       date_modified VARCHAR(120),
   //       userid VARCHAR(20)
   //     )`;
-  // const gifsTable = `CREATE TABLE IF NOT EXISTS
-  // gifstb(
-  //   gifId SERIAL PRIMARY KEY,
-  //   title VARCHAR(255) NOT NULL,
-  //   imageUrl VARCHAR(455) NOT NULL,
-  //   createdOn VARCHAR(120) NOT NULL,
-  //   userId VARCHAR(20)
-  // )`;
+  const gifsTable = `CREATE TABLE IF NOT EXISTS
+  gifstb(
+    gifId SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    imageUrl VARCHAR(455) NOT NULL,
+    createdOn VARCHAR(120) NOT NULL,
+    authorId VARCHAR(20)
+  )`;
 
   // const commentTable = `CREATE TABLE IF NOT EXISTS
   //     commenttb(
@@ -60,7 +60,7 @@ const createTables = () => {
   //   comment VARCHAR(500) NOT NULL,
   //   createdOn VARCHAR(120) NOT NULL
   // )`;
-  pool.query(usersTable)
+  pool.query(gifsTable)
     .then((res) => {
       // eslint-disable-next-line no-console
       console.log(res);

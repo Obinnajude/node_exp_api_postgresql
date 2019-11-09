@@ -58,3 +58,27 @@ describe('POST /auth/signin', () => {
     });
   });
 });
+
+describe('POST /gifs', () => {
+  const url = "http://localhost:3000/api/v2/gifs";
+
+  it("should return status 201", () => {
+    Request.post(url, (error, response) => {
+      expect(response.statusCode).toBe(201);
+    });
+  });
+  it("should have response spec", () => {
+    Request.post(url, (error, response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          gifId: response.body.gifId,
+          message: response.body.message,
+          createdOn: response.body.createdOn,
+          title: response.body.title,
+          imageUrl: response.body.imageUrl
+        }
+      });
+    });
+  });
+});
