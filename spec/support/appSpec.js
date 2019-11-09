@@ -20,39 +20,38 @@ describe('POST /auth/create-user', () => {
 
   it("should return status 201", () => {
     Request.post(url, (error, response) => {
-      expect(response.status).toBe(success);
+      expect(response.statusCode).toBe(201);
     });
   });
-  it('body', () => {
+  it("body", () => {
     Request.post(url, (error, response) => {
-      expect(response).toEqual({
-        status: response.status,
+      expect(response.body).toEqual({
+        status: response.body.status,
         data: {
-          message: response.message,
-          articleId: response.articleId,
-          createdOn: response.createdOn,
-          articleTitle: response.articleTitle
+          message: response.body.message,
+          articleId: response.body.articleId,
+          createdOn: response.body.createdOn,
+          articleTitle: response.body.articleTitle
         }
       });
     });
   });
 });
-
 describe('POST /auth/signin', () => {
   const url = "http://localhost:3000/api/v2/auth/signin";
 
   it("should return status 200", () => {
     Request.post(url, (error, response) => {
-      expect(response.status).toBe(success);
+      expect(response.statusCode).toBe(200);
     });
   });
   it("should have response spec json", () => {
     Request.post(url, (error, response) => {
-      expect(response).toEqual({
-        status: response.status,
+      expect(response.body).toEqual({
+        status: response.body.status,
         data: {
-          token: response.token,
-          userId: response.userid
+          token: response.body.token,
+          userId: response.body.userid
         }
       });
     });
@@ -64,19 +63,19 @@ describe('POST /gifs', () => {
 
   it("should return status 201", () => {
     Request.post(url, (error, response) => {
-      expect(response.status).toBe(success);
+      expect(response.statusCode).toBe(201);
     });
   });
   it("should have response spec", () => {
     Request.post(url, (error, response) => {
-      expect(response).toEqual({
-        status: response.status,
+      expect(response.body).toEqual({
+        status: response.body.status,
         data: {
-          gifId: response.gifId,
-          message: response.message,
-          createdOn: response.createdOn,
-          title: response.title,
-          imageUrl: response.imageUrl
+          gifId: response.body.gifId,
+          message: response.body.message,
+          createdOn: response.body.createdOn,
+          title: response.body.title,
+          imageUrl: response.body.imageUrl
         }
       });
     });
