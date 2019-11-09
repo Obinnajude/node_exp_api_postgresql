@@ -224,3 +224,22 @@ exports.gifCreateComment = (req, res) => {
     });
   });
 };
+exports.newsFeed = (req, res) => {
+  pool.query('SELECT * FROM gifstb ORDER BY gifid DESC').then((data) => {
+    pool.query('SELECT * FROM articletb ORDER BY article_id DESC').then((result) => {
+      res.status(200).json({
+        status: "success",
+        data: [data.rows, result.rows]
+
+      });
+    }).catch(() => {
+      res.status(400).json({
+        Error: "unable to display articles"
+      });
+    });
+  }).catch(() => {
+    res.status(400).json({
+      Error: " Unable to display gifs"
+    });
+  });
+};

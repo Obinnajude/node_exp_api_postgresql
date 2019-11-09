@@ -242,3 +242,24 @@ describe('POST /gifss/:id/comment', () => {
     });
   });
 });
+describe('GET /feed', () => {
+  const url = "/api/v2/feed";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return status 200", () => {
+    request(server).delete(url, (response) => {
+      expect(response.statusCode).toBe(200);
+    });
+  });
+  it("should have response spec", () => {
+    request(server).patch(url, (response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: [response.body.data]
+      });
+    });
+  });
+});
