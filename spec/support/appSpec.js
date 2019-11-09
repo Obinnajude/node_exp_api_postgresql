@@ -89,3 +89,30 @@ describe('POST /gifs', () => {
     });
   });
 });
+
+describe('POST /articles', () => {
+  const url = "/api/v2/articles";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return status 201", () => {
+    request(server).post(url, (error, response) => {
+      expect(response.statusCode).toBe(201);
+    });
+  });
+  it("should have response spec", () => {
+    request(server).post(url, (error, response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          message: response.body.message,
+          articleId: response.body.articleId,
+          createdOn: response.body.createdOn,
+          articleTitle: response.body.articleTitle
+        }
+      });
+    });
+  });
+});
