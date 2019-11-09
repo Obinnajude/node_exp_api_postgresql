@@ -4,7 +4,11 @@ node_js:
 catch: npm
 install: 
 -npm ci
+branches:
+  only:
+  - master
+  - /.*/
 env:
--DB: postgres
+-DB = postgres
 script:
 -npm run test
