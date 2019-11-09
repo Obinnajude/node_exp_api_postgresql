@@ -35,7 +35,6 @@ exports.createGifs = (req, res) => {
     });
   });
 };
-
 exports.createArticle = (req, res) => {
   const { title, article } = req.body;
   const dateCreated = new Date();
@@ -61,25 +60,41 @@ exports.createArticle = (req, res) => {
     });
   });
 };
-
 exports.editArticle = (req, res) => {
   const { title, article } = req.body;
   const id = req.params.articleId;
   const dateModified = new Date();
-  pool.query('UPDATE articletb SET article_title=$1, article_body=$2, date_modified = $3 WHERE article_id=$4', [title, article, dateModified, id])
-    .then(() => {
-      res.status(201).json({
-        status: "success",
-        data: {
-          massage: "article successfully updated",
-          title,
-          article
-        }
-      });
-    }).catch(() => {
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, 'AM-HAPPY');
+  const { userId } = decodedToken;
+  pool.query('SELECT authorid FROM articletb WHERE article_id = $1', [id]).then((data) => {
+    if (data.rows[0].authorid == userId) {
+      pool.query('UPDATE articletb SET article_title=$1, article_body=$2, date_modified = $3 WHERE article_id=$4', [title, article, dateModified, id])
+        .then(() => {
+          res.status(201).json({
+            status: "success",
+            data: {
+              massage: "article successfully updated",
+              title,
+              article
+            }
+          });
+        }).catch(() => {
+          res.status(400).json({
+            status: "error",
+            error: "Unable to edit article we are working to fix it..try again later"
+          });
+        });
+    } else {
       res.status(400).json({
         status: "error",
-        error: "Unable to edit article we are working to fix it..try again later"
+        error: "You can't update this article. Maybe you are not the author"
       });
+    }
+  }).catch(() => {
+    res.status(400).json({
+      status: "error",
+      error: "article does not exist"
     });
+  });
 };

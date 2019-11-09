@@ -7,4 +7,5 @@ router.post('/gifs', auth, employeeCtrl.createGifs);
 router.post('/articles', auth, employeeCtrl.createArticle);
 router.patch('/articles/:articleId', auth, employeeCtrl.editArticle);
 
+
 module.exports = router;
