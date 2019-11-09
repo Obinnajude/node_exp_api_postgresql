@@ -18,6 +18,7 @@ before_script:
   - psql -c "CREATE USER obinna WITH PASSWORD null;" -U postgres
   - npm run create
 script:
+  -npm install request body-parser
   - npm test
 after_success:
   - npm run coverage
