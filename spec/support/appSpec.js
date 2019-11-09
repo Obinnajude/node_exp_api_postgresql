@@ -1,30 +1,30 @@
 /* eslint-disable no-undef */
-const Request = require('request');
+const request = require('supertest');
+const app = require('../../app.js');
 
 
 describe('sever', () => {
   // eslint-disable-next-line no-unused-vars
-  let server;
-
-  beforeAll(() => {
-    // eslint-disable-next-line global-require
-    server = require('../../server');
-  });
+  const server = app.listen();
   afterAll(() => {
-    sever.close();
+   r.close();
   });
 });
 
 describe('POST /auth/create-user', () => {
-  const url = "http://localhost:3000/api/v2/auth/create-user";
+  const url = "/api/v2/auth/create-user";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
 
   it("should return status 201", () => {
-    Request.post(url, (error, response) => {
+    request(server).post(url, (error, response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("body", () => {
-    Request.post(url, (error, response) => {
+    request(server).post(url, (error, response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -38,15 +38,19 @@ describe('POST /auth/create-user', () => {
   });
 });
 describe('POST /auth/signin', () => {
-  const url = "http://localhost:3000/api/v2/auth/signin";
+  const url = "/api/v2/auth/signin";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
 
   it("should return status 200", () => {
-    Request.post(url, (error, response) => {
+    request(server).post(url, (error, response) => {
       expect(response.statusCode).toBe(200);
     });
   });
   it("should have response spec json", () => {
-    Request.post(url, (error, response) => {
+    request(server).post(url, (error, response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -59,15 +63,19 @@ describe('POST /auth/signin', () => {
 });
 
 describe('POST /gifs', () => {
-  const url = "http://localhost:3000/api/v2/gifs";
+  const url = "/api/v2/gifs";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
 
   it("should return status 201", () => {
-    Request.post(url, (error, response) => {
+    request(server).post(url, (error, response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("should have response spec", () => {
-    Request.post(url, (error, response) => {
+    request(server).post(url, (error, response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
