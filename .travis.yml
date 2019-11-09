@@ -1,14 +1,25 @@
 language: node_js
 node_js:
--10.16.3
-catch: npm
-install: 
--npm ci
-branches:
-  only:
-  - master
-  - /.*/
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm install
+services:
+  - postgresql
+
 env:
--DB = postgres
+  global:
+  - NODE_ENV=test
+
+before_script:
+  - psql -c 'create database capstonedb2' -U postgres
+  - psql -c "CREATE USER obinna WITH PASSWORD 39ugwuodo;" -U postgres
+  - npm run build
+  - npm run create
+  - 
 script:
--npm run test
+  - npm test
+after_success:
+  - npm run coverage
