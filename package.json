@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "test": "jasmine",
-    "build": "./build",
     "start": "node server.js",
     "eslint": "eslint server.js",
     "nodemonstart": "nodemon server.js",

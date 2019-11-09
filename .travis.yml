@@ -16,9 +16,7 @@ env:
 before_script:
   - psql -c 'create database capstonedb2' -U postgres
   - psql -c "CREATE USER obinna WITH PASSWORD null;" -U postgres
-  - npm run build
   - npm run create
-  - 
 script:
   - npm test
 after_success:
