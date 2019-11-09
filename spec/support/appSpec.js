@@ -166,3 +166,26 @@ describe('DELETE /articles/:id', () => {
     });
   });
 });
+describe('DELETE /gifs/:id', () => {
+  const url = "/api/v2/gifs/:id";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return status 200", () => {
+    request(server).delete(url, (response) => {
+      expect(response.statusCode).toBe(200);
+    });
+  });
+  it("should have response spec", () => {
+    request(server).patch(url, (response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          message: response.body.message,
+        }
+      });
+    });
+  });
+});

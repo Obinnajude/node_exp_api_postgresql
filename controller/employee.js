@@ -131,3 +131,35 @@ exports.deleteArticle = (req, res) => {
     });
   });
 };
+exports.deleteGif = (req, res) => {
+  const { id } = req.params;
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, 'AM-HAPPY');
+  const { userId } = decodedToken;
+  pool.query('SELECT authorid FROM gifstb WHERE gifid = $1', [id]).then((data) => {
+    if (data.rows[0].authorid == userId) {
+      pool.query('DELETE FROM gifstb WHERE gifId = $1', [id]).then(() => {
+        res.status(200).json({
+          status: "success",
+          data: {
+            message: "gif post successfully deleted"
+          }
+        });
+      }).catch(() => {
+        res.status(400).json({
+          Error: "gif post was not deleted"
+        });
+      });
+    } else {
+      res.status(400).json({
+        status: "error",
+        error: "You can't delete this gif. Maybe you are not the author"
+      });
+    }
+  }).catch(() => {
+    res.status(400).json({
+      status: "error",
+      error: "gif does not exist"
+    });
+  });
+};
