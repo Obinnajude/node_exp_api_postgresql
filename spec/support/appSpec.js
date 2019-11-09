@@ -7,7 +7,7 @@ describe('sever', () => {
   // eslint-disable-next-line no-unused-vars
   const server = app.listen();
   afterAll(() => {
-    r.close();
+    server.close();
   });
 });
 

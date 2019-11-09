@@ -79,7 +79,7 @@ exports.editArticle = (req, res) => {
     }).catch(() => {
       res.status(400).json({
         status: "error",
-        error: "Unable to edit article"
+        error: "Unable to edit article we are working to fix it..try again later"
       });
     });
 };
