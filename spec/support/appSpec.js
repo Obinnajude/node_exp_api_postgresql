@@ -7,7 +7,7 @@ describe('sever', () => {
   // eslint-disable-next-line no-unused-vars
   const server = app.listen();
   afterAll(() => {
-    r.close();
+    server.close();
   });
 });
 
@@ -19,12 +19,12 @@ describe('POST /auth/create-user', () => {
   });
 
   it("should return status 201", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("body", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -45,12 +45,12 @@ describe('POST /auth/signin', () => {
   });
 
   it("should return status 200", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(200);
     });
   });
   it("should have response spec json", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -70,12 +70,12 @@ describe('POST /gifs', () => {
   });
 
   it("should return status 201", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("should have response spec", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -98,12 +98,12 @@ describe('POST /articles', () => {
   });
 
   it("should return status 201", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("should have response spec", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -111,6 +111,32 @@ describe('POST /articles', () => {
           articleId: response.body.articleId,
           createdOn: response.body.createdOn,
           articleTitle: response.body.articleTitle
+        }
+      });
+    });
+  });
+});
+
+describe('PATCh /articles/:id', () => {
+  const url = "/api/v2/articles/:id";
+  const server = app.listen();
+  afterAll(() => {
+    server.close();
+  });
+
+  it("should return status 201", () => {
+    request(server).patch(url, (error, response) => {
+      expect(response.statusCode).toBe(201);
+    });
+  });
+  it("should have response spec", () => {
+    request(server).patch(url, (error, response) => {
+      expect(response.body).toEqual({
+        status: response.body.status,
+        data: {
+          massage: response.body.message,
+          articleTitle: response.body.articleTitle,
+          articleBody: response.body.articleBody
         }
       });
     });

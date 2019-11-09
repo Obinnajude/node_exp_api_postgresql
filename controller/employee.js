@@ -61,3 +61,25 @@ exports.createArticle = (req, res) => {
     });
   });
 };
+
+exports.editArticle = (req, res) => {
+  const { title, article } = req.body;
+  const id = req.params.articleId;
+  const dateModified = new Date();
+  pool.query('UPDATE articletb SET article_title=$1, article_body=$2, date_modified = $3 WHERE article_id=$4', [title, article, dateModified, id])
+    .then(() => {
+      res.status(201).json({
+        status: "success",
+        data: {
+          massage: "article successfully updated",
+          title,
+          article
+        }
+      });
+    }).catch(() => {
+      res.status(400).json({
+        status: "error",
+        error: "Unable to edit article we are working to fix it..try again later"
+      });
+    });
+};
