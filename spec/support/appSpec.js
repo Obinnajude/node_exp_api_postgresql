@@ -19,12 +19,12 @@ describe('POST /auth/create-user', () => {
   });
 
   it("should return status 201", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("body", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -45,12 +45,12 @@ describe('POST /auth/signin', () => {
   });
 
   it("should return status 200", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(200);
     });
   });
   it("should have response spec json", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -70,12 +70,12 @@ describe('POST /gifs', () => {
   });
 
   it("should return status 201", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("should have response spec", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
@@ -98,12 +98,12 @@ describe('POST /articles', () => {
   });
 
   it("should return status 201", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.statusCode).toBe(201);
     });
   });
   it("should have response spec", () => {
-    request(server).post(url, (error, response) => {
+    request(server).post(url, (response) => {
       expect(response.body).toEqual({
         status: response.body.status,
         data: {
