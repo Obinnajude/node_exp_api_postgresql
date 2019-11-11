@@ -5,3 +5,22 @@
 
 # node-exp-api-postgresql
 Capstone Project Api 
+
+
+# Below are the endpoints for the api
+
+# POST /api/v2/auth/create-user
+# POST /api/v2/auth/signin
+# POST /api/v2/gifs
+# POST /api/v2/articles
+# PATCH /api/v2/articles/<:articleId>
+# DELETE /api/v2/articles/<:articleId>
+# DELETE /api/v2/gifs/<:gifId>
+# POST /api/v2/articles/<:articleId>/comment
+# POST /api/v2/gifs/<:gifId>/comment
+# GET /api/v2/feed
+# GET /api/v2/articles/<:articleId>
+# GET /api/v2/gifs/<:gifId>
+
+
+
