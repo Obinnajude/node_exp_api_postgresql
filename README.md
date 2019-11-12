@@ -22,5 +22,9 @@ Capstone Project Api
 # GET /api/v2/articles/<:articleId>
 # GET /api/v2/gifs/<:gifId>
 
+# to post gif and article or make comments login with the details below. remeber only admin can create user.
+email: test@gmail.com
+password: 12345
+
 
 
