@@ -7,7 +7,7 @@
     "test": "jasmine",
     "start": "node server.js",
     "eslint": "eslint server.js",
-    "nodemonstart": "nodemon server.js",
+    "start:dev": "nodemon server.js",
     "create": "node ./services/db createTables",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
@@ -22,10 +22,15 @@
     "start",
     "test",
     "eslint",
-    "build"
+    "build",
+    "create",
+    "tart:dev"
   ],
   "author": "Obinna Jude",
   "license": "ISC",
+  "engines": {
+    "node": "10.16.3"
+  },
   "bugs": {
     "url": "https://github.com/Obinnajude/node-exp-api-postgresql/issues"
   },
@@ -36,6 +41,7 @@
     "cloudinary": "^1.16.0",
     "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.7",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jasmine": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
