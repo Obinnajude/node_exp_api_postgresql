@@ -5,6 +5,7 @@ exports.createUser = (req, res) => {
   // eslint-disable-next-line object-curly-spacing
   // eslint-disable-next-line object-curly-newline
   const { firstName, lastName, email, gender, jobRole, department, address } = req.body;
+  const token = req.headers.authorization.split(' ')[1];
   bcrypt.hash(req.body.password, 10, (error, hash) => {
     if (hash) {
       pool.query('INSERT INTO users (first_name,last_name, email, password, gender, job_role,department, address)VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING userId As id',
@@ -13,6 +14,7 @@ exports.createUser = (req, res) => {
           status: "success",
           data: {
             message: "User account successfully created",
+            token,
             userId: data.rows[0].id
           }
         });
