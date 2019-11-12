@@ -295,7 +295,7 @@ exports.viewgif = (req, res) => {
     });
   }).catch(() => {
     res.status(400).json({
-      Error: "gifs are not selected form the database"
+      Error: "gifs are not selected from the database"
     });
   });
 };
