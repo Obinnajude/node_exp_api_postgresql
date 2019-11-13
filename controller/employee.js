@@ -1,6 +1,12 @@
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary').v2;
 const pool = require('../services/dbconfig');
-const cloudinary = require('../services/cloudinary_config');
+
+cloudinary.config({
+  cloud_name: 'hiq2ruku6',
+  api_key: '256464275878118',
+  api_secret: 'mxfClCcnqKnej2lO7Y7oE0Q_Gk0'
+});
 
 exports.createGifs = (req, res) => {
   const { title, image } = req.body;
