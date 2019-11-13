@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
-const cloudinary = require('cloudinary').v2;
 const pool = require('../services/dbconfig');
-
+const cloudinary = require('../services/cloudinary_config');
 
 exports.createGifs = (req, res) => {
   const { title, image } = req.body;
