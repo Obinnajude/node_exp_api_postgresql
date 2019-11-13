@@ -3,8 +3,7 @@ const pool = require('../services/dbconfig');
 const cloudinary = require('../services/cloudinary_config');
 
 exports.createGifs = (req, res) => {
-  const { title } = req.body;
-  const image = req.files[0].path;
+  const { title, image } = req.body;
   const createdOn = new Date();
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, 'AM-HAPPY');
