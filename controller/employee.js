@@ -8,17 +8,23 @@ exports.createGifs = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, 'AM-HAPPY');
   const { userId } = decodedToken;
-  cloudinary.upload(image).then((result) => {
-    const imageUrl = result.secure_url;
-    pool.query('INSERT INTO gifstb(title, imageUrl, createdOn, authorid)VALUES($1,$2,$3,$4) RETURNING gifId As id', [title, imageUrl, createdOn, userId]).then((results) => {
+  cloudinary.upload(image)
+  .then((result) => {
+    const gifdetails = [
+      result.url,
+      result.public_id
+    ];
+    
+    pool.query('INSERT INTO gifstb(title, imageUrl, createdOn, authorid)VALUES($1,$2,$3,$4) RETURNING gifId As id', [title, gifdetails, createdOn, userId])
+    .then((data) => {
       res.status(201).json({
         status: "success",
         data: {
-          gifId: results.rows[0].id,
+          gifId: data.rows[0].id,
           message: "GIF image successfully posted",
           createdOn,
           title,
-          imageUrl
+          gifdetails
         }
       });
     }).catch(() => {
