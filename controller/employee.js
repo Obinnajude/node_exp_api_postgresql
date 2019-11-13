@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary');
 const pool = require('../services/dbconfig');
 
 
