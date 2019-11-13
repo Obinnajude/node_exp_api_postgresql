@@ -4,7 +4,7 @@ const cloudinary = require('../services/cloudinary_config');
 
 exports.createGifs = (req, res) => {
   const { title } = req.body;
-  const image = req.file[0].path;
+  const image = req.files[0].path;
   const createdOn = new Date();
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, 'AM-HAPPY');
