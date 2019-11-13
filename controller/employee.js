@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
-const cloudinary = require('cloudinary').v2;
 const pool = require('../services/dbconfig');
-// const cloudinary = require('../services/cloudinary_config');
+const cloudinary = require('../services/cloudinary_config');
 
 exports.createGifs = (req, res) => {
   const { title, image } = req.body;
@@ -31,7 +30,7 @@ exports.createGifs = (req, res) => {
   }).catch(() => {
     res.status(400).json({
       status: "error",
-      error: "Please there is a problem connecting to cloudinary "
+      error: "cloudinary connection failed"
     });
   });
 };
