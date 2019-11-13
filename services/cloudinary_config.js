@@ -7,4 +7,5 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
-module.exports = cloudinary;
+exports.upload = (gif) => cloudinary.uploader.upload(gif);
+exports.delete = (gifid) => cloudinary.uploader.destroy(gifid);
