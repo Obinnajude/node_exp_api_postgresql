@@ -3,7 +3,7 @@ const pool = require('../services/dbconfig');
 const cloudinary = require('../services/cloudinary_config');
 
 exports.createGifs = (req, res) => {
-  const image = req.files[0].path;
+  const image = req.FILES.file;
   const { title } = req.body;
   const createdOn = new Date();
   const token = req.headers.authorization.split(' ')[1];
