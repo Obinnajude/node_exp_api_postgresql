@@ -12,7 +12,10 @@ app.use('/api/v2/', adminRoute);
 app.use('/api/v2/', signInRoute);
 app.use('/api/v2/', employeeRoutes);
 
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '/index.html'));
+});
+app.get('/api/v2', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '/index.html'));
 });
 module.exports = app;
