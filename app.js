@@ -8,14 +8,15 @@ const employeeRoutes = require('./routes/employee');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/api/v2/', adminRoute);
-app.use('/api/v2/', signInRoute);
-app.use('/api/v2/', employeeRoutes);
+app.use('/api/v1/', adminRoute);
+app.use('/api/v1/', signInRoute);
+app.use('/api/v1/', employeeRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '/index.html'));
 });
-app.get('/api/v2', (req, res) => {
+app.get('/api/v1', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '/index.html'));
 });
+
 module.exports = app;
