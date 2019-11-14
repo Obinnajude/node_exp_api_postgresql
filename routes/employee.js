@@ -14,4 +14,5 @@ router.post('/gifs/:id/comment', auth, employeeCtrl.gifCreateComment);
 router.get('/feed', employeeCtrl.newsFeed);
 router.get('/articles/:id', employeeCtrl.viewArticle);
 router.get('/gifs/:id', employeeCtrl.viewgif);
+
 module.exports = router;

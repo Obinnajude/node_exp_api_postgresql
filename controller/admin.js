@@ -25,7 +25,7 @@ exports.createUser = (req, res) => {
         }).catch(() => {
           res.status(400).json({
             status: "error",
-            Error: "User not created, email address has been used by another"
+            Error: "User not created, email address has been used by another user"
           });
         });
       } else {

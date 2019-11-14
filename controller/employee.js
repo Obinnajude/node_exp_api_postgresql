@@ -26,7 +26,7 @@ exports.createGifs = (req, res) => {
     }).catch(() => {
       res.status(400).json({
         status: "error",
-        error: "Gif was not saved successfully to the database"
+        error: "Gif was not saved successfully"
       });
     });
   }).catch(() => {
