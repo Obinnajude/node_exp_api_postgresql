@@ -1,16 +1,18 @@
 const jwt = require('jsonwebtoken');
 const pool = require('../services/dbconfig');
 const cloudinary = require('../services/cloudinary_config');
+const { dataUri } = require('../middleware/multer');
 
 exports.createGifs = (req, res) => {
-  const { title, image } = req.body;
+  const image = dataUri(req).content;
+  const { title } = req.body;
   const createdOn = new Date();
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token, 'AM-HAPPY');
   const { userId } = decodedToken;
-  cloudinary.uploader.upload(image).then((result) => {
-    const imageUrl = result.secure_url;
-    pool.query('INSERT INTO gifstb(title, imageUrl, createdOn, authorid)VALUES($1,$2,$3,$4) RETURNING gifId As id', [title, imageUrl, createdOn, userId]).then((results) => {
+  cloudinary.upload(image).then((gif) => {
+    const imageUrl = gif.secure_url;
+    pool.query('INSERT INTO gifstb(title, imageurl, createdon, authorid)VALUES($1,$2,$3,$4) RETURNING gifid As id', [title, imageUrl, createdOn, userId]).then((results) => {
       res.status(201).json({
         status: "success",
         data: {
@@ -20,18 +22,17 @@ exports.createGifs = (req, res) => {
           title,
           imageUrl
         }
-
       });
     }).catch(() => {
       res.status(400).json({
         status: "error",
-        error: "Gif was not saved successfully to the database"
+        error: "Gif was not saved successfully"
       });
     });
   }).catch(() => {
     res.status(400).json({
       status: "error",
-      error: "Please there is a problem connecting to cloudinary "
+      error: "cloudinary connection failed"
     });
   });
 };

@@ -17,7 +17,7 @@ pool.on('connect', () => {
 
 const createTables = () => {
   const usersTable = `CREATE TABLE IF NOT EXISTS
-        users(
+          users(
           userId SERIAL PRIMARY KEY,
           first_name VARCHAR(128) NOT NULL,
           last_name VARCHAR(128) NOT NULL,
@@ -26,10 +26,10 @@ const createTables = () => {
           gender VARCHAR(128) NOT NULL,
           job_role VARCHAR(128) NOT NULL,
           department VARCHAR(128) NOT NULL,
-          address VARCHAR(128) NOT NULL,
+          address VARCHAR(128) NOT NULL
         )`;
   const articleTable = `CREATE TABLE IF NOT EXISTS
-      articletb(
+          articletb(
         article_id SERIAL PRIMARY KEY,
         article_title VARCHAR(255) NOT NULL,
         article_body VARCHAR(80000) NOT NULL,
@@ -38,7 +38,7 @@ const createTables = () => {
         authorid VARCHAR(20)
       )`;
   const gifsTable = `CREATE TABLE IF NOT EXISTS
-  gifstb(
+   gifstb(
     gifId SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     imageUrl VARCHAR(455) NOT NULL,
@@ -48,6 +48,7 @@ const createTables = () => {
 
   const commentTable = `CREATE TABLE IF NOT EXISTS
       commenttb(
+        id SERIAL PRIMARY KEY,
         commentId integer NOT NULL,
         comment VARCHAR(500) NOT NULL,
         createdOn VARCHAR(120) NOT NULL
@@ -55,6 +56,7 @@ const createTables = () => {
 
   const commentTableGif = `CREATE TABLE IF NOT EXISTS
   gifcommenttb(
+    id SERIAL PRIMARY KEY,
     commentId integer NOT NULL,
     comment VARCHAR(500) NOT NULL,
     createdOn VARCHAR(120) NOT NULL
