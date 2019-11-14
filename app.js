@@ -1,15 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const multer = require('multer');
+// const multer = require('multer');
 const adminRoute = require('./routes/admin');
 const signInRoute = require('./routes/signin');
 const employeeRoutes = require('./routes/employee');
 
-const upload = multer();
+// const upload = multer();
 
 const app = express();
-app.use(upload.array());
+// app.use(upload.array());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/v1/', adminRoute);
