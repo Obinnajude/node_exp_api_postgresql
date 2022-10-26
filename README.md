@@ -22,7 +22,7 @@ Capstone Project Api
 # GET /api/v2/articles/<:articleId>
 # GET /api/v2/gifs/<:gifId>
 
-# to post gif and article or make comments login with the details below. remeber only admin can create user the hosted link for the api is https://devcapstoneapi.herokuapp.com include the endpoints.
+# to post gif and article or make comments login with the details below. remember only admin can create user the hosted link for the api is https://devcapstoneapi.herokuapp.com include the endpoints.
 
 email: test@gmail.com
 password: 12345
